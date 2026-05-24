@@ -1,0 +1,22 @@
+@import "pico";
+
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  font-size: 20px;
+  letter-spacing: 3px;
+
+}
+
+
+
+.header-main {
+  width: 98vw;
+  height: 200px;
+  text-align: center;
+  background-color: rgb(248, 133, 133);
+}
