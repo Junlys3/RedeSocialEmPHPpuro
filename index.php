@@ -27,7 +27,7 @@ $allUsersResult = $conn->query($sqlallUsers); // Executa a consulta e armazena o
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-theme="dark">
 
 <head>
   <meta charset="UTF-8">

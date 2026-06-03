@@ -1,8 +1,8 @@
 <?php
-$host = "sql201.infinityfree.com";
-$username = "if0_42083168";
-$password = "1478963Ju";
-$dbname = "if0_42083168_balacobase";
+$host = "localhost";
+$username = "root";
+$password = "";
+$dbname = "posts_data";
 
 $conn = new mysqli($host, $username, $password, $dbname);
 if ($conn->connect_error) {
