@@ -1,26 +1,38 @@
 <?php
 require("db.php");
+session_start(); // Inicia a sessão para acessar as informações do usuário
+
+$username = $_SESSION['username']; // Obtém o nome de usuário armazenado na sessão
 
 
-if (!empty($_POST['user_Data']) && !empty($_POST['text_Data'])) { // Verifica se os campos estão preenchidos
-  $user_Data = $_POST['user_Data']; // Usar as super globais $_POST para obter os dados do formulário
-  $text_Data = $_POST['text_Data'];
+$serverHttpMethod = $_SERVER['REQUEST_METHOD'];
 
-  $store_Data = $conn->prepare("INSERT INTO posts_data (user_Data, text_Data) VALUES (?, ?)"); // Prepara a consulta SQL para inserção de dados
-  $store_Data->bind_param("ss", $user_Data, $text_Data); // Trata os dados para evitar SQL Injection tratando todos os dados como strings (ss)
-  $store_Data->execute(); // Executa a consulta para armazenar os dados no banco de dados
-} else {
-  echo "<p 
+
+if ($serverHttpMethod == "POST") {
+  if (!empty($_POST['user_Data']) && !empty($_POST['text_Data'])) { // Verifica se os campos estão preenchidos
+    $user_Data = $_POST['user_Data']; // Usar as super globais $_POST para obter os dados do formulário
+    $text_Data = $_POST['text_Data'];
+
+    $store_Data = $conn->prepare("INSERT INTO posts_data (user_Data, text_Data) VALUES (?, ?)"); // Prepara a consulta SQL para inserção de dados
+    $store_Data->bind_param("ss", $user_Data, $text_Data); // Trata os dados para evitar SQL Injection tratando todos os dados como strings (ss)
+    $store_Data->execute(); // Executa a consulta para armazenar os dados no banco de dados
+  } else {
+    echo "<p 
   style='color:red'
 
   >
   Por favor, preencha todos os campos.
   </p>";
+  }
 }
+
+
 
 $sqlallUsers = "SELECT * FROM posts_data"; // Consulta SQL para selecionar todos os dados da tabela posts_data
 
 $allUsersResult = $conn->query($sqlallUsers); // Executa a consulta e armazena o resultado
+
+
 
 
 
@@ -33,13 +45,13 @@ $allUsersResult = $conn->query($sqlallUsers); // Executa a consulta e armazena o
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Página inicial</title>
-  <link rel="stylesheet" href="pico-main/css/pico.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
 </head>
 
 <body>
   <header class="header-main container">
     <div class="div-main">
-      <h1 style="text-align: center;">Bem-vindo | Sem nome</h1>
+      <h1 style="text-align: center;">Bem-vindo | <?php echo $username  ?></h1>
       <hr>
     </div>
     <div class="div-form">
